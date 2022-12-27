@@ -7,7 +7,7 @@ const TaskList = ({ item }) => {
             <FormControlLabel control={<Checkbox name="checkedC" />} label={item} />
             <Grid  >
                 <Button style={{ margin: 4 }} variant="contained" color="primary">Edit</Button>
-                <Button style={{ margin: 4 }} variant="contained" color="primary">Edit</Button>
+                <Button style={{ margin: 4 }} variant="contained" color="primary">Delete</Button>
             </Grid>
         </Grid>
     );
