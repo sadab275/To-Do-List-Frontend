@@ -40,7 +40,7 @@ const Input = () => {
                 redirect: 'follow'
             };
 
-            fetch("http://localhost:8000/user", requestOptions)
+            fetch("http://localhost:5000/users", requestOptions)
                 .then(response => response.json())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));

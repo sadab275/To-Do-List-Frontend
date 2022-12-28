@@ -2,13 +2,13 @@ import { Checkbox, Grid, FormControlLabel, Button } from '@material-ui/core';
 import React from 'react';
 import TaskList from './TaskList';
 
-const items = [1, 2, 3, 4];
-const TaskItemFay = ({ tasks }) => {
+
+const TaskItemFay = ({ tasks, handleChange }) => {
     return (
         <Grid>
             {
                 tasks.map((task, index) => {
-                    return <TaskList key={index} task={task}></TaskList>
+                    return <TaskList key={index} task={task} handleChange={handleChange}></TaskList>
                 })
             }
         </Grid>
