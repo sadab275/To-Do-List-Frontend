@@ -3,12 +3,12 @@ import React from 'react';
 import TaskList from './TaskList';
 
 const items = [1, 2, 3, 4];
-const TaskItemFay = () => {
+const TaskItemFay = ({ tasks }) => {
     return (
         <Grid>
             {
-                items.map((item, index) => {
-                    return <TaskList key={index} item={item}></TaskList>
+                tasks.map((task, index) => {
+                    return <TaskList key={index} task={task}></TaskList>
                 })
             }
         </Grid>
