@@ -61,7 +61,7 @@ function App() {
       <Navbar></Navbar>
       <Input fetchData={fetchData}></Input>
       {/* <TaskItem></TaskItem> */}
-      <TaskItemFay fetchData={fetchData} handleChange={handleChange} tasks={tasks} />
+      <TaskItemFay tasks={tasks} fetchData={fetchData} handleChange={handleChange} />
 
 
     </div>

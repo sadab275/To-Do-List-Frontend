@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const InputSecond = ({ fetchData }) => {
+const InputSecond = ({ fetchData, task }) => {
     const classes = useStyles();
-    const [task, setTask] = useState('');
+    const [tasks, setTasks] = useState('');
 
     // const handleChange = (e) => {
     //     const task = e.target.value;
@@ -23,25 +23,26 @@ const InputSecond = ({ fetchData }) => {
     const handlePost = async (e) => {
         if (e.key === "Enter") {
             console.log(e.target.value);
-            const task = e.target.value
+            const taskName = e.target.value;
+
 
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
             var raw = JSON.stringify({
-                "name": task,
+                "name": taskName,
                 "isChecked": false,
                 "isDeleted": false
             });
 
             var requestOptions = {
-                method: 'POST',
+                method: 'PATCH',
                 headers: myHeaders,
                 body: raw,
                 redirect: 'follow'
             };
 
-            fetch("http://localhost:5000/users", requestOptions)
+            fetch(`http://localhost:5000/users/${task?._id}`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     fetchData();
@@ -49,7 +50,7 @@ const InputSecond = ({ fetchData }) => {
                 })
                 .catch(error => console.log('error', error));
 
-            setTask(task);
+            setTasks(taskName);
         }
     }
 

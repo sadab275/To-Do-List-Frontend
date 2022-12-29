@@ -35,7 +35,7 @@ const TaskList = ({ task, handleChange, handleClickOpen, fetchData }) => {
                 showInput ?
                     <>
                         {/* <p>Loading</p> */}
-                        <InputSecond></InputSecond>
+                        <InputSecond task={task} fetchData={fetchData}></InputSecond>
 
                     </> :
                     <FormControlLabel onChange={() => handleChange(task?._id)} control={<Checkbox name="checkedC" />} checked={task.isChecked} label={task.name} />
