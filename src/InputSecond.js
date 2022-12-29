@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
-const Input = ({ fetchData }) => {
+
+const InputSecond = ({ fetchData }) => {
     const classes = useStyles();
     const [task, setTask] = useState('');
 
@@ -57,9 +58,9 @@ const Input = ({ fetchData }) => {
             <TextField
                 onKeyUp={handlePost}
                 // onChange={handleChange} 
-                style={{ width: "100%", fontWeight: 'bold' }} id="outlined-basic" label="Add a task" variant="outlined" />
+                style={{ width: "100%", fontWeight: 'bold' }} id="outlined-basic" label="Edit Task Name" variant="outlined" />
         </form>
     );
 };
 
-export default Input;
+export default InputSecond;

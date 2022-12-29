@@ -4,6 +4,8 @@ import Input from './Input';
 
 import TaskItemFay from './TaskItemFay';
 import { useEffect, useState } from 'react';
+import DeleteModal from './DeleteModal';
+import InputSecond from './InputSecond';
 
 
 
@@ -12,17 +14,23 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [tasks, settasks] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
 
   const fetchData = () => {
     return fetch("http://localhost:5000/users")
       .then((response) => response.json())
-      .then((data) => settasks(data));
+      .then((data) => {
+        settasks(data);
+        // setRefresh(!refresh)
+
+      });
 
   }
 
   useEffect(() => {
     fetchData();
-  }, [tasks])
+  }, [])
 
   const handleChange = id => {
     const newTask = tasks.find(task => task?._id === id)
@@ -39,18 +47,22 @@ function App() {
     })
       .then(res => res.json())
       .then(data => {
+        fetchData()
         // console.log(data);
+        // setRefresh(!refresh);
       })
 
 
   }
 
+
   return (
     <div className="App">
       <Navbar></Navbar>
-      <Input></Input>
+      <Input fetchData={fetchData}></Input>
       {/* <TaskItem></TaskItem> */}
-      <TaskItemFay handleChange={handleChange} tasks={tasks} />
+      <TaskItemFay fetchData={fetchData} handleChange={handleChange} tasks={tasks} />
+
 
     </div>
   );

@@ -1,21 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Checkbox, Grid, FormControlLabel, Button } from '@material-ui/core';
+import InputSecond from './InputSecond';
 
-const TaskList = ({ task, handleChange }) => {
-
+const TaskList = ({ task, handleChange, handleClickOpen, fetchData }) => {
+    const [showInput, setShowInput] = useState(false);
     const handleDelete = task => {
-        task.isDeleted = true
+        task.isDeleted = true;
         console.log(task);
+        fetch(`http://localhost:5000/users/${task?._id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        })
+            .then(res => res.json())
+            .then(data => {
+                fetchData();
+                // console.log(data);
+            })
+
+
+    }
+    const handleUpdate = (id) => {
+        setShowInput(!showInput);
 
     }
 
 
+
     return (
         <Grid container justifyContent='space-between' style={{ padding: 16 }}>
-            <FormControlLabel onChange={() => handleChange(task?._id)} control={<Checkbox name="checkedC" />} label={task.name} />
+            {
+                showInput ?
+                    <>
+                        {/* <p>Loading</p> */}
+                        <InputSecond></InputSecond>
+
+                    </> :
+                    <FormControlLabel onChange={() => handleChange(task?._id)} control={<Checkbox name="checkedC" />} checked={task.isChecked} label={task.name} />
+            }
             <Grid  >
-                <Button style={{ margin: 4 }} variant="contained" color="primary">Edit</Button>
+                <Button onClick={() => handleUpdate(task._id)} style={{ margin: 4 }} variant="contained" color="primary">Edit</Button>
                 <Button onClick={() => handleDelete(task)} style={{ margin: 4 }} variant="contained" color="primary">Delete</Button>
+                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                    Open alert dialog
+                </Button>
             </Grid>
         </Grid>
     );
